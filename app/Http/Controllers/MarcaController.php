@@ -80,6 +80,7 @@ class MarcaController extends Controller
      */
     public function update($id, Request $request)
     {
+        // dd($request->all());
         $request->validate(Marca::$rules);
         $marca = Marca::find($id);
         if ($marca) {

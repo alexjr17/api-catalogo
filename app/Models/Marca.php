@@ -14,4 +14,7 @@ class Marca extends Model
     static $rules = [
         'name' => 'required | unique:marcas'
     ];
+    public function producto() {
+        return $this->HasMany('App\Models\Producto');
+    }
 }

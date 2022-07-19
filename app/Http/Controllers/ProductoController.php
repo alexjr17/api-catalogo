@@ -14,7 +14,9 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+        $productos = producto::with('marca')->paginate(10);
+        // dd(response()->json($productos));
+        return response()->json($productos);
     }
 
     /**
@@ -35,7 +37,10 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $request->validate(producto::$rules);
+        $producto = producto::create($request->all());
+        return response()->json($producto);
     }
 
     /**
@@ -55,9 +60,12 @@ class ProductoController extends Controller
      * @param  \App\Models\producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function edit(producto $producto)
+    public function edit($id)
     {
-        //
+        $producto = producto::find($id);
+        if ($producto) {
+            return response()->json($producto);
+        }
     }
 
     /**
@@ -67,9 +75,13 @@ class ProductoController extends Controller
      * @param  \App\Models\producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, producto $producto)
+    public function update(Request $request, $id)
     {
-        //
+        $producto = producto::find($id);
+        if($producto) {
+            $producto->update($request->all());
+            return response()->json($producto);
+        }
     }
 
     /**
@@ -78,8 +90,12 @@ class ProductoController extends Controller
      * @param  \App\Models\producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(producto $producto)
+    public function destroy($id)
     {
-        //
+        $producto = producto::find($id);
+        if ($producto) {
+            $producto->delete();
+            return response()->json(['state'=> 200]);
+        }
     }
 }

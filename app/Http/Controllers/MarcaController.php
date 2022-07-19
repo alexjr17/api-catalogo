@@ -18,6 +18,10 @@ class MarcaController extends Controller
         return response()->json($marcas);
     }
 
+    public function get_marcas() {
+        $marcas = Marca::select(['name', 'id'])->get();
+        return response()->json($marcas);
+    }
     /**
      * Show the form for creating a new resource.
      *

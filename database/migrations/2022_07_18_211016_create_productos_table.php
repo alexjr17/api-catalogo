@@ -18,14 +18,16 @@ return new class extends Migration
             $table->string('name');
             $table->string('size');
             $table->text('observations');
-            $table->unsignedBigInteger('marca_id');            
+            $table->unsignedBigInteger('marca_id')->nullable();            
             $table->integer('inventory');
             $table->date('date');
             $table->timestamps();
 
             $table->foreign('marca_id')
                     ->references('id')
-                    ->on('marcas');
+                    ->on('marcas')
+                    ->onDelete('set null')
+                    ->onUpdate('cascade');
         });
     }
 

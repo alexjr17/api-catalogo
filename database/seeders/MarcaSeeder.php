@@ -15,6 +15,18 @@ class MarcaSeeder extends Seeder
      */
     public function run()
     {
-       Marca::factory(45)->create();
+    //    Marca::factory(5)->create();
+        Marca::create([
+            'name' => 'Nike',
+        ]);
+        Marca::create([
+            'name' => 'Polo',
+        ]);
+        Marca::create([
+            'name' => 'Adidas',
+        ]);
+        Marca::create([
+            'name' => 'Puma',
+        ]);
     }
 }
